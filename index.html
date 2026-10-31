@@ -1,18 +1,12 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>English & The Digital World</title>
+    <title>Language in Motion</title>
 
     <style>
-
-        /* =========================================
-           GENERAL
-        ========================================= */
-
         * {
             margin: 0;
             padding: 0;
@@ -24,1385 +18,1342 @@
         }
 
         body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: #f7f8fc;
-            color: #20243a;
-            line-height: 1.7;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f1eb;
+            color: #171717;
+            line-height: 1.6;
         }
 
         a {
+            color: inherit;
             text-decoration: none;
         }
 
         img {
             width: 100%;
             display: block;
+            object-fit: cover;
         }
 
+        /* =========================
+           DESKTOP NAVIGATION
+        ========================= */
 
-        /* =========================================
-           HEADER
-        ========================================= */
+        .side-nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 105px;
+            height: 100vh;
+            background: #111;
+            color: white;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 35px 0;
+        }
 
-        header {
+        .logo {
+            position: absolute;
+            top: 35px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ff4f4f;
+        }
+
+        /* =========================
+           MOBILE HEADER
+        ========================= */
+
+        .mobile-header {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 76px;
-            background: rgba(255,255,255,0.94);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid #e8eaf2;
-            z-index: 1000;
-
-            display: flex;
+            height: 70px;
+            background: #111;
+            color: white;
+            z-index: 1100;
             align-items: center;
             justify-content: space-between;
-
-            padding: 0 6%;
+            padding: 0 25px;
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-
-            color: #5b4bdb;
-            font-weight: 800;
-            font-size: 18px;
+        .mobile-logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
         }
-
-        .brand-mark {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-
-            background: #5b4bdb;
-            color: white;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-weight: 800;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        nav a,
-        .resources-button {
-            color: #53596f;
-            font-size: 13px;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
-        nav a:hover,
-        .resources-button:hover {
-            color: #5b4bdb;
-        }
-
-
-        /* =========================================
-           DESKTOP RESOURCES MENU
-        ========================================= */
-
-        .resources {
-            position: relative;
-        }
-
-        .resources-button {
-            cursor: pointer;
-        }
-
-        .resources-menu {
-            position: absolute;
-            right: 0;
-            top: 34px;
-
-            min-width: 190px;
-
-            background: white;
-            border: 1px solid #e5e7ef;
-            border-radius: 14px;
-
-            padding: 8px;
-
-            box-shadow: 0 20px 45px rgba(35, 38, 65, 0.15);
-
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-
-            transition: 0.25s;
-        }
-
-        .resources:hover .resources-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .resources-menu a {
-            display: block;
-            padding: 11px 14px;
-            border-radius: 9px;
-        }
-
-        .resources-menu a:hover {
-            background: #f0eeff;
-        }
-
-
-        /* =========================================
-           MOBILE MENU BUTTON
-        ========================================= */
 
         .menu-button {
-            display: none;
-
-            width: 44px;
-            height: 44px;
-
+            background: none;
             border: none;
-            border-radius: 12px;
-
-            background: #eeeaff;
-            color: #5b4bdb;
-
-            font-size: 23px;
-
+            color: white;
+            font-size: 30px;
             cursor: pointer;
         }
 
         .mobile-menu {
             display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: #111;
+            z-index: 1099;
+            padding: 25px;
         }
 
-
-        /* =========================================
-           HERO
-        ========================================= */
-
-        .hero {
-            min-height: 100vh;
-
-            padding: 150px 7% 90px;
-
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 70px;
-            align-items: center;
-
-            background:
-                radial-gradient(
-                    circle at 80% 20%,
-                    #ded9ff 0,
-                    transparent 28%
-                ),
-                #f7f8fc;
+        .mobile-menu.active {
+            display: block;
         }
 
-        .hero-label {
-            display: inline-block;
-
-            padding: 8px 15px;
-
-            border-radius: 30px;
-
-            background: #e9e6ff;
-            color: #5b4bdb;
-
-            font-size: 12px;
-            font-weight: 800;
-
-            letter-spacing: 1px;
-
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(48px, 7vw, 88px);
-            line-height: 0.98;
-
-            color: #20243a;
-
-            margin-bottom: 30px;
-        }
-
-        .hero h1 span {
-            color: #5b4bdb;
-        }
-
-        .hero-description {
-            max-width: 610px;
-
-            color: #697087;
-            font-size: 18px;
-
-            margin-bottom: 30px;
-        }
-
-        .hero-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-
-            padding: 14px 22px;
-
-            background: #5b4bdb;
+        .mobile-menu a {
+            display: block;
             color: white;
-
-            border-radius: 12px;
-
-            font-weight: 700;
-            font-size: 14px;
-
-            box-shadow: 0 12px 25px rgba(91,75,219,0.25);
-
-            transition: 0.3s;
-        }
-
-        .hero-button:hover {
-            transform: translateY(-3px);
-        }
-
-        .hero-visual {
-            position: relative;
-        }
-
-        .hero-visual img {
-            height: 500px;
-            object-fit: cover;
-
-            border-radius: 35px;
-
-            box-shadow:
-                0 30px 70px rgba(38, 39, 65, 0.18);
-        }
-
-        .hero-note {
-            position: absolute;
-
-            left: -30px;
-            bottom: 35px;
-
-            width: 230px;
-
-            background: white;
-
-            padding: 22px;
-
-            border-radius: 20px;
-
-            box-shadow:
-                0 18px 40px rgba(35,38,65,0.15);
-        }
-
-        .hero-note-number {
-            color: #5b4bdb;
-            font-size: 28px;
-            font-weight: 800;
-        }
-
-        .hero-note p {
-            color: #72778b;
-            font-size: 13px;
-        }
-
-
-        /* =========================================
-           SECTIONS
-        ========================================= */
-
-        .section {
-            padding: 110px 7%;
-        }
-
-        .section-inner {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .heading {
-            max-width: 750px;
-            margin-bottom: 60px;
-        }
-
-        .heading-number {
-            color: #5b4bdb;
-            font-weight: 800;
-            font-size: 13px;
+            padding: 14px 0;
+            border-bottom: 1px solid #333;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: bold;
             letter-spacing: 2px;
         }
 
-        .heading h2 {
-            font-size: clamp(35px, 5vw, 58px);
-            line-height: 1.1;
+        /* =========================
+           MAIN
+        ========================= */
 
-            color: #20243a;
-
-            margin: 10px 0 18px;
+        main {
+            margin-left: 105px;
         }
 
-        .heading p {
-            color: #73788d;
-            font-size: 17px;
+        section {
+            min-height: 100vh;
+            padding: 100px 8%;
         }
 
+        /* =========================
+           COVER
+        ========================= */
 
-        /* =========================================
-           QUESTION / ANSWER LAYOUT
-        ========================================= */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: #e8e3da;
+            padding: 80px 8%;
+        }
 
-        .answer-layout {
+        .cover-grid {
+            width: 100%;
             display: grid;
-            grid-template-columns: 0.85fr 1.15fr;
-            gap: 55px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 70px;
             align-items: center;
         }
 
-        .answer-image img {
-            height: 440px;
-            object-fit: cover;
-
-            border-radius: 30px;
+        .cover h1 {
+            font-size: clamp(70px, 10vw, 155px);
+            line-height: 0.82;
+            letter-spacing: -8px;
+            text-transform: uppercase;
+            font-weight: 900;
+            max-width: 850px;
         }
 
-        .answer-content {
-            background: white;
-
-            padding: 40px;
-
-            border-radius: 25px;
-
-            box-shadow:
-                0 15px 40px rgba(30,34,60,0.07);
+        .cover h1 span {
+            color: transparent;
+            -webkit-text-stroke: 2px #171717;
         }
 
-        .answer-content h3 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #292d45;
+        .cover-description {
+            margin-top: 45px;
+            max-width: 520px;
+            font-size: 17px;
+            color: #444;
         }
 
-        .answer-content > p {
-            color: #70758a;
+        .cover-image {
+            height: 650px;
+            overflow: hidden;
+        }
+
+        .cover-image img {
+            height: 100%;
+            filter: grayscale(100%);
+        }
+
+        /* =========================
+           ARTICLE SECTIONS
+        ========================= */
+
+        .article {
+            background: #f4f1eb;
+        }
+
+        .article.dark {
+            background: #111;
+            color: white;
+        }
+
+        .article-heading {
+            display: block;
+            margin-bottom: 75px;
+        }
+
+        .article-heading h2 {
+            font-size: clamp(50px, 7vw, 105px);
+            line-height: 0.9;
+            letter-spacing: -5px;
+            text-transform: uppercase;
+            max-width: 1100px;
+        }
+
+        .article-heading h2 span {
+            color: #ff4f4f;
+        }
+
+        .article-intro {
+            max-width: 720px;
+            font-size: 20px;
+            margin-bottom: 70px;
+        }
+
+        /* =========================
+           WORLD
+        ========================= */
+
+        .world-feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .world-image {
+            height: 500px;
+        }
+
+        .world-image img {
+            height: 100%;
+            filter: grayscale(100%);
+        }
+
+        .world-text h3 {
+            font-size: 42px;
+            line-height: 1;
             margin-bottom: 25px;
         }
 
-
-        /* =========================================
-           POINTS
-        ========================================= */
-
-        .points {
-            display: grid;
-            gap: 15px;
-        }
-
-        .point {
-            display: grid;
-            grid-template-columns: 42px 1fr;
-            gap: 14px;
-            align-items: start;
-        }
-
-        .point-number {
-            width: 42px;
-            height: 42px;
-
-            border-radius: 12px;
-
-            background: #eeeaff;
-            color: #5b4bdb;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-weight: 800;
-        }
-
-        .point h4 {
-            color: #292d45;
-            margin-bottom: 3px;
-        }
-
-        .point p {
-            color: #777c90;
-            font-size: 14px;
-        }
-
-
-        /* =========================================
-           ALTERNATING SECTION
-        ========================================= */
-
-        .purple-section {
-            background: #29264a;
-            color: white;
-        }
-
-        .purple-section .heading h2 {
-            color: white;
-        }
-
-        .purple-section .heading p {
-            color: #c9c7d8;
-        }
-
-        .purple-section .heading-number {
-            color: #bdb4ff;
-        }
-
-
-        /* =========================================
-           TECHNOLOGY CARDS
-        ========================================= */
-
-        .technology-grid {
-            display: grid;
-            grid-template-columns: repeat(3,1fr);
-            gap: 20px;
-        }
-
-        .technology-card {
-            min-height: 270px;
-
-            padding: 30px;
-
-            background: #343052;
-
-            border: 1px solid #484365;
-            border-radius: 22px;
-
-            transition: 0.3s;
-        }
-
-        .technology-card:hover {
-            transform: translateY(-7px);
-            background: #3a355c;
-        }
-
-        .technology-icon {
-            font-size: 35px;
+        .world-text p {
+            font-size: 17px;
+            color: #555;
             margin-bottom: 20px;
         }
 
-        .technology-card h3 {
-            margin-bottom: 12px;
+        .quote {
+            border-left: 5px solid #ff4f4f;
+            padding: 25px;
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 30px;
         }
 
-        .technology-card p {
-            color: #c6c3d5;
-            font-size: 14px;
-        }
-
-
-        /* =========================================
-           KNOWLEDGE SECTION
-        ========================================= */
-
-        .knowledge-layout {
+        .world-cards {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
 
-        .knowledge-card {
-            padding: 35px;
-
-            background: white;
-
-            border-radius: 22px;
-
-            border: 1px solid #e8e9f1;
-
-            transition: 0.3s;
+        .world-card {
+            border-top: 2px solid #171717;
+            padding-top: 25px;
         }
 
-        .knowledge-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(30,34,60,0.08);
+        .world-card h4 {
+            font-size: 25px;
+            margin-bottom: 12px;
         }
 
-        .knowledge-card.large {
-            grid-row: span 2;
-            background: #5b4bdb;
+        .world-card p {
+            color: #555;
+        }
+
+        /* =========================
+           TECHNOLOGY
+        ========================= */
+
+        .technology {
+            background: #111;
             color: white;
         }
 
-        .knowledge-card.large p {
-            color: #e0ddf5;
+        .technology .article-intro {
+            color: #bbb;
         }
 
-        .knowledge-icon {
-            font-size: 30px;
-            margin-bottom: 15px;
-        }
-
-        .knowledge-card h3 {
-            margin-bottom: 10px;
-            color: #292d45;
-        }
-
-        .knowledge-card.large h3 {
-            color: white;
-            font-size: 28px;
-        }
-
-        .knowledge-card p {
-            color: #777c90;
-            font-size: 14px;
-        }
-
-
-        /* =========================================
-           COMMERCE
-        ========================================= */
-
-        .commerce-section {
-            background: #f0f1f7;
-        }
-
-        .commerce-layout {
+        .tech-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 70px;
             align-items: center;
         }
 
-        .commerce-image img {
-            height: 500px;
-            object-fit: cover;
-
-            border-radius: 30px;
+        .tech-image {
+            height: 560px;
         }
 
-        .commerce-content h3 {
-            font-size: 34px;
-            color: #292d45;
-
-            margin-bottom: 15px;
+        .tech-image img {
+            height: 100%;
+            filter: grayscale(100%);
         }
 
-        .commerce-content > p {
-            color: #70758a;
+        .tech-content h3 {
+            font-size: 45px;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .tech-content p {
+            color: #bbb;
+            font-size: 17px;
             margin-bottom: 30px;
         }
 
-        .commerce-list {
-            display: grid;
-            gap: 15px;
+        .digital-words {
+            border-top: 1px solid #444;
         }
 
-        .commerce-item {
-            background: white;
-
-            padding: 20px;
-
-            border-radius: 15px;
-
+        .digital-word {
             display: flex;
-            gap: 15px;
-            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 18px 0;
+            border-bottom: 1px solid #444;
         }
 
-        .commerce-item-icon {
-            width: 42px;
-            height: 42px;
-
-            flex-shrink: 0;
-
-            border-radius: 12px;
-
-            background: #eeeaff;
-            color: #5b4bdb;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 20px;
+        .digital-word strong {
+            font-size: 18px;
         }
 
-        .commerce-item h4 {
-            color: #292d45;
-            margin-bottom: 3px;
-        }
-
-        .commerce-item p {
-            color: #777c90;
-            font-size: 13px;
-        }
-
-
-        /* =========================================
-           ONLINE LEARNING
-        ========================================= */
-
-        .learning-header {
-            text-align: center;
-            max-width: 750px;
-            margin: 0 auto 55px;
-        }
-
-        .learning-header h2 {
-            font-size: clamp(35px, 5vw, 58px);
-            line-height: 1.1;
-
-            color: #20243a;
-
-            margin: 10px 0 18px;
-        }
-
-        .learning-header p {
-            color: #73788d;
-        }
-
-        .learning-path {
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 18px;
-        }
-
-        .learning-step {
-            background: white;
-
-            padding: 30px 24px;
-
-            border-radius: 20px;
-
-            border-bottom: 4px solid #5b4bdb;
-
-            box-shadow:
-                0 10px 30px rgba(30,34,60,0.06);
-        }
-
-        .learning-step span {
-            display: block;
-
-            color: #5b4bdb;
-
-            font-size: 12px;
-            font-weight: 800;
-
-            margin-bottom: 15px;
-        }
-
-        .learning-step h3 {
-            color: #292d45;
-            margin-bottom: 10px;
-        }
-
-        .learning-step p {
-            color: #777c90;
+        .digital-word span {
+            color: #999;
             font-size: 14px;
+            text-align: right;
         }
 
+        /* =========================
+           KNOWLEDGE
+        ========================= */
 
-        /* =========================================
-           PRESENTATION
-        ========================================= */
-
-        .presentation {
-            background: #29264a;
-            color: white;
-            text-align: center;
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            margin-top: 70px;
         }
 
-        .presentation .heading {
-            margin-left: auto;
-            margin-right: auto;
+        .knowledge-column {
+            border-top: 2px solid #171717;
+            padding-top: 25px;
         }
 
-        .presentation .heading h2 {
-            color: white;
-        }
-
-        .presentation .heading p {
-            color: #c9c7d8;
-        }
-
-        .presentation-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-
-            padding: 16px 25px;
-
-            background: white;
-            color: #5b4bdb;
-
-            border-radius: 14px;
-
-            font-weight: 800;
-
-            transition: 0.3s;
-        }
-
-        .presentation-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(0,0,0,.2);
-        }
-
-
-        /* =========================================
-           FINAL SECTION
-        ========================================= */
-
-        .final-message {
-            text-align: center;
-
-            padding: 120px 7%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #5b4bdb,
-                    #7a68e8
-                );
-
-            color: white;
-        }
-
-        .final-message h2 {
-            font-size: clamp(38px, 6vw, 68px);
-            line-height: 1.05;
-
+        .knowledge-column h3 {
+            font-size: 30px;
             margin-bottom: 20px;
         }
 
-        .final-message p {
-            max-width: 700px;
-            margin: auto;
-
-            color: #e9e6ff;
-            font-size: 17px;
+        .knowledge-column p {
+            color: #555;
         }
 
+        .knowledge-flow {
+            margin-top: 90px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 2px solid #171717;
+            border-bottom: 2px solid #171717;
+        }
 
-        /* =========================================
+        .flow-item {
+            padding: 35px 25px;
+            border-right: 1px solid #bbb;
+        }
+
+        .flow-item:last-child {
+            border-right: none;
+        }
+
+        .flow-item h4 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .flow-item p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* =========================
+           COMMERCE
+        ========================= */
+
+        .commerce {
+            background: #d9d4cb;
+        }
+
+        .commerce-intro {
+            max-width: 800px;
+            font-size: 21px;
+            margin-bottom: 80px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #171717;
+            transform: translateX(-50%);
+        }
+
+        .timeline-step {
+            width: 50%;
+            padding: 30px 50px;
+            position: relative;
+        }
+
+        .timeline-step:nth-child(odd) {
+            margin-left: 0;
+            text-align: right;
+        }
+
+        .timeline-step:nth-child(even) {
+            margin-left: 50%;
+        }
+
+        .timeline-step::after {
+            content: "";
+            position: absolute;
+            top: 40px;
+            width: 16px;
+            height: 16px;
+            background: #ff4f4f;
+            border: 3px solid #171717;
+            border-radius: 50%;
+        }
+
+        .timeline-step:nth-child(odd)::after {
+            right: -9px;
+        }
+
+        .timeline-step:nth-child(even)::after {
+            left: -9px;
+        }
+
+        .timeline-step h3 {
+            font-size: 35px;
+            margin: 10px 0 15px;
+        }
+
+        .timeline-step p {
+            color: #555;
+        }
+
+        /* =========================
+           LEARNING
+        ========================= */
+
+        .learning {
+            background: #f4f1eb;
+        }
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: start;
+        }
+
+        .learning-image {
+            height: 600px;
+        }
+
+        .learning-image img {
+            height: 100%;
+            filter: grayscale(100%);
+        }
+
+        .learning-methods {
+            border-top: 2px solid #171717;
+        }
+
+        .method {
+            padding: 30px 0;
+            border-bottom: 1px solid #bbb;
+        }
+
+        .method h3 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .method p {
+            color: #555;
+        }
+
+        .learning-final {
+            margin-top: 80px;
+            background: #111;
+            color: white;
+            padding: 55px;
+        }
+
+        .learning-final h3 {
+            font-size: 40px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .learning-final p {
+            color: #bbb;
+            max-width: 700px;
+        }
+
+        /* =========================
+           PRESENTATION
+        ========================= */
+
+        .presentation {
+            min-height: auto;
+            background: #ff4f4f;
+            color: #111;
+            padding: 100px 8%;
+        }
+
+        .presentation h2 {
+            font-size: clamp(55px, 8vw, 120px);
+            line-height: 0.85;
+            letter-spacing: -5px;
+            text-transform: uppercase;
+            max-width: 900px;
+        }
+
+        .presentation p {
+            margin-top: 35px;
+            max-width: 600px;
+            font-size: 18px;
+        }
+
+        .presentation-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 18px 35px;
+            background: #111;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s ease;
+        }
+
+        .presentation-button:hover {
+            background: white;
+            color: #111;
+        }
+
+        /* =========================
            FOOTER
-        ========================================= */
+        ========================= */
 
         footer {
-            background: #202039;
-
-            color: #aaa9bb;
-
-            text-align: center;
-
-            padding: 35px 20px;
-
-            font-size: 13px;
+            margin-left: 105px;
+            background: #111;
+            color: white;
+            padding: 45px 8%;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: center;
         }
 
         footer strong {
-            color: white;
-        }
-
-
-        /* =========================================
-           TOP BUTTON
-        ========================================= */
-
-        #topButton {
-            position: fixed;
-
-            right: 25px;
-            bottom: 25px;
-
-            width: 48px;
-            height: 48px;
-
-            border: none;
-            border-radius: 50%;
-
-            background: #5b4bdb;
-            color: white;
-
             font-size: 20px;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 12px 25px rgba(91,75,219,.3);
-
-            display: none;
-
-            z-index: 999;
         }
 
-        #topButton.show {
-            display: block;
+        footer span {
+            color: #999;
+            font-size: 13px;
         }
 
+        /* =========================
+           RESPONSIVE
+        ========================= */
 
-        /* =========================================
-           TABLET
-        ========================================= */
+        @media (max-width: 1000px) {
 
-        @media (max-width: 1050px) {
-
-            nav {
-                gap: 13px;
-            }
-
-            nav a,
-            .resources-button {
-                font-size: 11px;
-            }
-
-            .hero {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-visual {
-                max-width: 700px;
-                width: 100%;
-            }
-
-            .technology-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .learning-path {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-
-        /* =========================================
-           MOBILE
-        ========================================= */
-
-        @media (max-width: 850px) {
-
-            header {
-                height: 70px;
-                padding: 0 5%;
-            }
-
-            nav {
+            .side-nav {
                 display: none;
             }
 
-            .menu-button {
+            .mobile-header {
                 display: flex;
-                align-items: center;
-                justify-content: center;
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            footer {
+                margin-left: 0;
+            }
+
+            section {
+                padding: 90px 7%;
+            }
+
+            .cover-grid,
+            .world-feature,
+            .tech-layout,
+            .learning-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-image {
+                height: 500px;
+            }
+
+            .world-cards,
+            .knowledge-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .knowledge-flow {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .flow-item:nth-child(2) {
+                border-right: none;
+            }
+
+            .flow-item:nth-child(3),
+            .flow-item:nth-child(4) {
+                border-top: 1px solid #bbb;
+            }
+
+            .timeline-step {
+                width: 100%;
+                margin-left: 0 !important;
+                text-align: left !important;
+                padding-left: 55px;
+                padding-right: 20px;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-step::after {
+                left: 1px !important;
+                right: auto !important;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .mobile-header {
+                height: 65px;
+                padding: 0 20px;
             }
 
             .mobile-menu {
-                position: absolute;
-
-                top: 70px;
-                left: 0;
-
-                width: 100%;
-
-                background: white;
-
-                border-top: 1px solid #e8e9f1;
-
-                box-shadow:
-                    0 20px 35px rgba(30,34,60,.12);
-
-                padding: 15px 5%;
-
-                max-height: calc(100vh - 70px);
-
-                overflow-y: auto;
+                top: 65px;
             }
 
-            .mobile-menu.open {
-                display: block;
-            }
-
-            .mobile-menu a,
-            .mobile-resources-button {
-                display: block;
-
-                width: 100%;
-
-                padding: 14px 12px;
-
-                border: none;
-                border-radius: 10px;
-
-                background: transparent;
-
-                color: #53596f;
-
-                text-align: left;
-
-                font-family: inherit;
-                font-size: 15px;
-                font-weight: 700;
-
-                cursor: pointer;
-            }
-
-            .mobile-menu a:hover,
-            .mobile-resources-button:hover {
-                background: #eeeaff;
-                color: #5b4bdb;
-            }
-
-            .mobile-resources-submenu {
-                display: none;
-                padding-left: 15px;
-            }
-
-            .mobile-resources-submenu.open {
-                display: block;
-            }
-
-            .mobile-resources-submenu a {
-                color: #5b4bdb;
-                font-size: 14px;
-            }
-
-            .hero {
-                padding: 120px 6% 80px;
-                gap: 50px;
-            }
-
-            .hero-visual img {
-                height: 390px;
-            }
-
-            .hero-note {
-                left: 20px;
-            }
-
-            .section {
+            section {
                 padding: 80px 6%;
             }
 
-            .answer-layout,
-            .commerce-layout {
-                grid-template-columns: 1fr;
+            .cover {
+                padding-top: 110px;
             }
 
-            .knowledge-layout {
-                grid-template-columns: 1fr;
+            .cover h1 {
+                font-size: 65px;
+                letter-spacing: -4px;
             }
 
-            .knowledge-card.large {
-                grid-row: auto;
-            }
-
-            .technology-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .learning-path {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-
-        /* =========================================
-           SMALL PHONES
-        ========================================= */
-
-        @media (max-width: 550px) {
-
-            .brand {
-                font-size: 15px;
-            }
-
-            .brand-mark {
-                width: 38px;
-                height: 38px;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .hero-description {
+            .cover-description {
                 font-size: 16px;
             }
 
-            .hero-visual img {
-                height: 300px;
-                border-radius: 25px;
+            .cover-image,
+            .world-image,
+            .tech-image,
+            .learning-image {
+                height: 400px;
             }
 
-            .hero-note {
-                position: relative;
-                left: 15px;
-                bottom: auto;
-
-                margin-top: -30px;
+            .article-heading {
+                margin-bottom: 55px;
             }
 
-            .answer-content {
-                padding: 27px;
+            .article-heading h2 {
+                font-size: 53px;
+                letter-spacing: -3px;
             }
 
-            .answer-image img,
-            .commerce-image img {
-                height: 300px;
+            .article-intro {
+                font-size: 17px;
             }
 
-            .learning-path {
+            .world-cards,
+            .knowledge-grid,
+            .knowledge-flow {
                 grid-template-columns: 1fr;
             }
 
-            .final-message {
-                padding: 90px 6%;
+            .flow-item {
+                border-right: none;
+                border-bottom: 1px solid #bbb;
+            }
+
+            .flow-item:last-child {
+                border-bottom: none;
+            }
+
+            .tech-content h3,
+            .world-text h3 {
+                font-size: 35px;
+            }
+
+            .digital-word {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .digital-word span {
+                text-align: left;
+            }
+
+            .learning-final {
+                padding: 35px 25px;
+            }
+
+            .learning-final h3 {
+                font-size: 32px;
+            }
+
+            .presentation h2 {
+                font-size: 58px;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
-
     </style>
 </head>
 
-
 <body>
 
+    <!-- =========================
+         DESKTOP NAVIGATION
+    ========================== -->
 
-    <!-- =========================================
-         HEADER
-    ========================================= -->
+    <aside class="side-nav">
 
-    <header>
-
-        <div class="brand">
-
-            <div class="brand-mark">
-                ET
-            </div>
-
-            English & Technology
-
+        <div class="logo">
+            LM
         </div>
 
-
-        <!-- Desktop navigation -->
-
-        <nav>
-
-            <a href="#home">
-                Home
-            </a>
-
-            <a href="#world">
-                English in the World
-            </a>
-
-            <a href="#technology">
-                English & Technology
-            </a>
-
-            <a href="#knowledge">
-                Shared Knowledge
-            </a>
-
-            <a href="#commerce">
-                Commerce
-            </a>
-
-            <a href="#learning">
-                Learning English
-            </a>
-
-
-            <div class="resources">
-
-                <span class="resources-button">
-                    Resources ▾
-                </span>
-
-                <div class="resources-menu">
-
-                    <a
-                        href="https://canva.link/ubqw30lie85biba"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Presentation
-                    </a>
-
-                </div>
-
-            </div>
-
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#world">English</a>
+            <a href="#technology">Technology</a>
+            <a href="#knowledge">Knowledge</a>
+            <a href="#commerce">Commerce</a>
+            <a href="#learning">Learning</a>
+            <a href="#presentation">Resources</a>
         </nav>
 
+    </aside>
 
-        <!-- Mobile button -->
 
-        <button
-            class="menu-button"
-            id="menuButton"
-            aria-label="Open menu"
-            aria-expanded="false"
-        >
+    <!-- =========================
+         MOBILE NAVIGATION
+    ========================== -->
+
+    <header class="mobile-header">
+
+        <div class="mobile-logo">
+            LM
+        </div>
+
+        <button class="menu-button" onclick="toggleMenu()">
             ☰
         </button>
 
-
-        <!-- Mobile menu -->
-
-        <div
-            class="mobile-menu"
-            id="mobileMenu"
-        >
-
-            <a href="#home">
-                Home
-            </a>
-
-            <a href="#world">
-                English in the World
-            </a>
-
-            <a href="#technology">
-                English & Technology
-            </a>
-
-            <a href="#knowledge">
-                Shared Knowledge
-            </a>
-
-            <a href="#commerce">
-                Commerce
-            </a>
-
-            <a href="#learning">
-                Learning English
-            </a>
-
-
-            <button
-                class="mobile-resources-button"
-                id="mobileResourcesButton"
-            >
-                Resources ▾
-            </button>
-
-
-            <div
-                class="mobile-resources-submenu"
-                id="mobileResourcesSubmenu"
-            >
-
-                <a
-                    href="https://canva.link/ubqw30lie85biba"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Presentation
-                </a>
-
-            </div>
-
-        </div>
-
     </header>
 
+    <div class="mobile-menu" id="mobileMenu">
 
-    <!-- =========================================
-         HOME
-    ========================================= -->
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#world" onclick="closeMenu()">English</a>
+        <a href="#technology" onclick="closeMenu()">Technology</a>
+        <a href="#knowledge" onclick="closeMenu()">Knowledge</a>
+        <a href="#commerce" onclick="closeMenu()">Commerce</a>
+        <a href="#learning" onclick="closeMenu()">Learning</a>
+        <a href="#presentation" onclick="closeMenu()">Resources</a>
 
-    <section
-        class="hero"
-        id="home"
-    >
+    </div>
 
-        <div>
 
-            <span class="hero-label">
-                REALITY & VIRTUALITY RESOURCE
-            </span>
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
-            <h1>
-                English in a
-                <span>Connected</span>
-                World
-            </h1>
+    <main>
 
-            <p class="hero-description">
-                English and digital technology influence
-                the way people communicate, study,
-                exchange information, and participate
-                in modern society.
+        <!-- COVER -->
+
+        <section class="cover" id="home">
+
+            <div class="cover-grid">
+
+                <div>
+
+                    <h1>
+                        English
+                        <span>In</span>
+                        Motion
+                    </h1>
+
+                    <p class="cover-description">
+                        English has become more than a language.
+                        It connects people, technologies, ideas,
+                        businesses, and educational opportunities
+                        across the modern world.
+                    </p>
+
+                </div>
+
+                <div class="cover-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80"
+                        alt="World map"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ENGLISH IN THE WORLD -->
+
+        <section class="article" id="world">
+
+            <div class="article-heading">
+
+                <h2>
+                    English
+                    <span>Across</span>
+                    The World
+                </h2>
+
+            </div>
+
+            <p class="article-intro">
+                English is used in many different environments.
+                It appears in international communication,
+                entertainment, education, science, travel,
+                and professional life.
             </p>
 
-            <a
-                href="#world"
-                class="hero-button"
-            >
-                Explore the topics →
-            </a>
 
-        </div>
+            <div class="world-feature">
 
-
-        <div class="hero-visual">
-
-            <img
-                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85"
-                alt="Student working with digital technology"
-            >
-
-            <div class="hero-note">
-
-                <div class="hero-note-number">
-                    05
-                </div>
-
-                <p>
-                    Main topics connecting
-                    English, technology,
-                    knowledge, commerce,
-                    and education.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-         01 ENGLISH IN THE WORLD
-    ========================================= -->
-
-    <section
-        class="section"
-        id="world"
-    >
-
-        <div class="section-inner">
-
-            <div class="heading">
-
-                <span class="heading-number">
-                    QUESTION 01
-                </span>
-
-                <h2>
-                    How is English used around the world?
-                </h2>
-
-                <p>
-                    English has become an important tool
-                    for communication between people who
-                    may have different first languages.
-                </p>
-
-            </div>
-
-
-            <div class="answer-layout">
-
-                <div class="answer-image">
+                <div class="world-image">
 
                     <img
-                        src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=85"
-                        alt="World map representing international communication"
+                        src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80"
+                        alt="Traveler looking at a landscape"
+                    >
+
+                </div>
+
+                <div class="world-text">
+
+                    <h3>
+                        A shared language
+                        for different cultures.
+                    </h3>
+
+                    <p>
+                        People from different countries often
+                        use English when they do not share the
+                        same native language.
+                    </p>
+
+                    <p>
+                        This makes English especially useful for
+                        international meetings, tourism,
+                        academic collaboration, and digital
+                        communication.
+                    </p>
+
+                    <div class="quote">
+                        “Language creates a bridge between people.”
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="world-cards">
+
+                <div class="world-card">
+
+                    <h4>Travel</h4>
+
+                    <p>
+                        English can help travelers communicate
+                        at airports, hotels, restaurants,
+                        museums, and tourist destinations.
+                    </p>
+
+                </div>
+
+                <div class="world-card">
+
+                    <h4>Education</h4>
+
+                    <p>
+                        Many universities, courses, books,
+                        journals, and academic resources are
+                        available in English.
+                    </p>
+
+                </div>
+
+                <div class="world-card">
+
+                    <h4>Communication</h4>
+
+                    <p>
+                        English is frequently used in international
+                        conversations between people with different
+                        first languages.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ENGLISH AND TECHNOLOGY -->
+
+        <section class="article technology" id="technology">
+
+            <div class="article-heading">
+
+                <h2>
+                    English
+                    <span>Meets</span>
+                    Technology
+                </h2>
+
+            </div>
+
+            <p class="article-intro">
+                Technology has changed the way people learn,
+                communicate, work, and access information.
+                English is deeply connected to this digital
+                environment.
+            </p>
+
+
+            <div class="tech-layout">
+
+                <div class="tech-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
+                        alt="Computer technology"
+                    >
+
+                </div>
+
+                <div class="tech-content">
+
+                    <h3>
+                        The digital world
+                        speaks English.
+                    </h3>
+
+                    <p>
+                        Many websites, applications, programming
+                        resources, tutorials, and technology
+                        communities use English as a primary
+                        language.
+                    </p>
+
+                    <p>
+                        Understanding common digital vocabulary
+                        allows users to navigate technology more
+                        comfortably.
+                    </p>
+
+
+                    <div class="digital-words">
+
+                        <div class="digital-word">
+                            <strong>Account</strong>
+                            <span>A personal profile used on a platform.</span>
+                        </div>
+
+                        <div class="digital-word">
+                            <strong>Download</strong>
+                            <span>To transfer information to a device.</span>
+                        </div>
+
+                        <div class="digital-word">
+                            <strong>Search</strong>
+                            <span>To look for information online.</span>
+                        </div>
+
+                        <div class="digital-word">
+                            <strong>Update</strong>
+                            <span>A newer version of software or content.</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SHARED KNOWLEDGE -->
+
+        <section class="article" id="knowledge">
+
+            <div class="article-heading">
+
+                <h2>
+                    Knowledge
+                    <span>Moves</span>
+                    Online
+                </h2>
+
+            </div>
+
+            <p class="article-intro">
+                Digital platforms allow people to create,
+                organize, publish, and exchange knowledge
+                with audiences around the world.
+            </p>
+
+
+            <div class="knowledge-grid">
+
+                <div class="knowledge-column">
+
+                    <h3>Create</h3>
+
+                    <p>
+                        People can write articles, record lessons,
+                        design graphics, produce presentations,
+                        and create educational material.
+                    </p>
+
+                </div>
+
+                <div class="knowledge-column">
+
+                    <h3>Publish</h3>
+
+                    <p>
+                        Websites, blogs, online classrooms,
+                        social networks, and digital libraries
+                        make information accessible.
+                    </p>
+
+                </div>
+
+                <div class="knowledge-column">
+
+                    <h3>Discuss</h3>
+
+                    <p>
+                        Users can comment, ask questions,
+                        collaborate, correct information,
+                        and exchange different perspectives.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="knowledge-flow">
+
+                <div class="flow-item">
+
+                    <h4>Create</h4>
+
+                    <p>
+                        Develop a useful idea or resource.
+                    </p>
+
+                </div>
+
+                <div class="flow-item">
+
+                    <h4>Publish</h4>
+
+                    <p>
+                        Make the information available online.
+                    </p>
+
+                </div>
+
+                <div class="flow-item">
+
+                    <h4>Discuss</h4>
+
+                    <p>
+                        Exchange opinions and questions.
+                    </p>
+
+                </div>
+
+                <div class="flow-item">
+
+                    <h4>Share</h4>
+
+                    <p>
+                        Help information reach new people.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TECHNOLOGY IN COMMERCE -->
+
+        <section class="article commerce" id="commerce">
+
+            <div class="article-heading">
+
+                <h2>
+                    Technology
+                    <span>Changes</span>
+                    Commerce
+                </h2>
+
+            </div>
+
+            <p class="commerce-intro">
+                Digital technology has transformed the shopping
+                experience. Customers can discover products,
+                compare prices, make payments, and track orders
+                without visiting a physical store.
+            </p>
+
+
+            <div class="timeline">
+
+                <div class="timeline-step">
+
+                    <h3>Discover</h3>
+
+                    <p>
+                        People discover products through websites,
+                        applications, advertisements, social media,
+                        and search engines.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-step">
+
+                    <h3>Research</h3>
+
+                    <p>
+                        Customers can read descriptions, compare
+                        prices, examine reviews, and learn about
+                        different products before buying.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-step">
+
+                    <h3>Buy</h3>
+
+                    <p>
+                        Online stores allow customers to place
+                        orders and complete payments through
+                        digital systems.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-step">
+
+                    <h3>Track</h3>
+
+                    <p>
+                        After a purchase, customers can receive
+                        notifications and follow the delivery
+                        process online.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LEARNING ENGLISH ONLINE -->
+
+        <section class="article learning" id="learning">
+
+            <div class="article-heading">
+
+                <h2>
+                    Learn
+                    <span>English</span>
+                    Online
+                </h2>
+
+            </div>
+
+            <p class="article-intro">
+                Online learning gives students access to
+                English practice from almost anywhere.
+                Digital resources can support different
+                learning styles and abilities.
+            </p>
+
+
+            <div class="learning-grid">
+
+                <div class="learning-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80"
+                        alt="Student studying online"
                     >
 
                 </div>
 
 
-                <div class="answer-content">
+                <div class="learning-methods">
 
-                    <h3>
-                        A common language for connection
-                    </h3>
+                    <div class="method">
 
-                    <p>
-                        English can be found in many areas
-                        of international life. Its use is not
-                        limited to native speakers because
-                        people often use it as a shared
-                        language when communicating across
-                        countries.
-                    </p>
+                        <h3>Listening</h3>
 
+                        <p>
+                            Students can listen to interviews,
+                            conversations, podcasts, lessons,
+                            and other English materials.
+                        </p>
 
-                    <div class="points">
-
-                        <div class="point">
-
-                            <div class="point-number">
-                                01
-                            </div>
-
-                            <div>
-
-                                <h4>
-                                    International communication
-                                </h4>
-
-                                <p>
-                                    People may use English when
-                                    communicating with others whose
-                                    native language is different.
-                                </p>
-
-                            </div>
-
-                        </div>
+                    </div>
 
 
-                        <div class="point">
+                    <div class="method">
 
-                            <div class="point-number">
-                                02
-                            </div>
+                        <h3>Reading</h3>
 
-                            <div>
+                        <p>
+                            Online articles, digital books,
+                            educational websites, and news
+                            can increase vocabulary and
+                            comprehension.
+                        </p>
 
-                                <h4>
-                                    Education and research
-                                </h4>
-
-                                <p>
-                                    English is present in many
-                                    academic resources, publications,
-                                    and international courses.
-                                </p>
-
-                            </div>
-
-                        </div>
+                    </div>
 
 
-                        <div class="point">
+                    <div class="method">
 
-                            <div class="point-number">
-                                03
-                            </div>
+                        <h3>Writing</h3>
 
-                            <div>
+                        <p>
+                            Students can practice writing
+                            messages, essays, comments,
+                            descriptions, and other texts.
+                        </p>
 
-                                <h4>
-                                    Travel and culture
-                                </h4>
+                    </div>
 
-                                <p>
-                                    English can be useful when
-                                    traveling and accessing cultural
-                                    content from different countries.
-                                </p>
 
-                            </div>
+                    <div class="method">
 
-                        </div>
+                        <h3>Speaking</h3>
+
+                        <p>
+                            Video calls, language platforms,
+                            online communities, and voice
+                            activities can provide speaking
+                            practice.
+                        </p>
 
                     </div>
 
@@ -1410,831 +1361,95 @@
 
             </div>
 
-        </div>
 
-    </section>
+            <div class="learning-final">
 
-
-    <!-- =========================================
-         02 ENGLISH AND TECHNOLOGY
-    ========================================= -->
-
-    <section
-        class="section purple-section"
-        id="technology"
-    >
-
-        <div class="section-inner">
-
-            <div class="heading">
-
-                <span class="heading-number">
-                    QUESTION 02
-                </span>
-
-                <h2>
-                    What is the relationship between
-                    English and technology?
-                </h2>
+                <h3>
+                    Learning is no longer
+                    limited to a classroom.
+                </h3>
 
                 <p>
-                    Digital technology and English have
-                    developed together, creating a strong
-                    connection between language and
-                    technological communication.
+                    With digital tools and consistent practice,
+                    students can develop their English skills
+                    through resources that fit their interests,
+                    schedules, and goals.
                 </p>
 
             </div>
 
+        </section>
 
-            <div class="technology-grid">
 
-                <div class="technology-card">
+        <!-- PRESENTATION -->
 
-                    <div class="technology-icon">
-                        💻
-                    </div>
+        <section class="presentation" id="presentation">
 
-                    <h3>
-                        Digital Tools
-                    </h3>
+            <h2>
+                Final
+                Presentation
+            </h2>
 
-                    <p>
-                        Software, websites, applications,
-                        and computer systems frequently
-                        contain English terms and instructions.
-                    </p>
+            <p>
+                Explore the presentation connected to this
+                project and review the main ideas about English,
+                technology, knowledge, commerce, and online
+                learning.
+            </p>
 
-                </div>
-
-
-                <div class="technology-card">
-
-                    <div class="technology-icon">
-                        🔎
-                    </div>
-
-                    <h3>
-                        Online Information
-                    </h3>
-
-                    <p>
-                        English gives users access to a wide
-                        variety of websites, articles, tutorials,
-                        and digital resources.
-                    </p>
-
-                </div>
-
-
-                <div class="technology-card">
-
-                    <div class="technology-icon">
-                        👨‍💻
-                    </div>
-
-                    <h3>
-                        Programming
-                    </h3>
-
-                    <p>
-                        Many programming languages and
-                        technical concepts use words derived
-                        from English.
-                    </p>
-
-                </div>
-
-
-                <div class="technology-card">
-
-                    <div class="technology-icon">
-                        📡
-                    </div>
-
-                    <h3>
-                        Digital Communication
-                    </h3>
-
-                    <p>
-                        English is frequently used in online
-                        communities, social platforms, and
-                        international digital communication.
-                    </p>
-
-                </div>
-
-
-                <div class="technology-card">
-
-                    <div class="technology-icon">
-                        🧪
-                    </div>
-
-                    <h3>
-                        Science & Innovation
-                    </h3>
-
-                    <p>
-                        Scientists and technology professionals
-                        often use English to exchange research
-                        and technical information.
-                    </p>
-
-                </div>
-
-
-                <div class="technology-card">
-
-                    <div class="technology-icon">
-                        🌐
-                    </div>
-
-                    <h3>
-                        Global Access
-                    </h3>
-
-                    <p>
-                        Knowing English can make it easier
-                        to understand and navigate many
-                        international digital services.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-         03 SHARED KNOWLEDGE
-    ========================================= -->
-
-    <section
-        class="section"
-        id="knowledge"
-    >
-
-        <div class="section-inner">
-
-            <div class="heading">
-
-                <span class="heading-number">
-                    QUESTION 03
-                </span>
-
-                <h2>
-                    How does technology help people
-                    share knowledge?
-                </h2>
-
-                <p>
-                    Digital tools have changed how information
-                    is created, stored, accessed, and exchanged.
-                </p>
-
-            </div>
-
-
-            <div class="knowledge-layout">
-
-                <div class="knowledge-card large">
-
-                    <div class="knowledge-icon">
-                        🌎
-                    </div>
-
-                    <h3>
-                        Knowledge can travel beyond borders
-                    </h3>
-
-                    <p>
-                        A student in one country can access
-                        educational materials created in another
-                        country. Teachers, researchers, and
-                        communities can also collaborate without
-                        being in the same physical location.
-                    </p>
-
-                </div>
-
-
-                <div class="knowledge-card">
-
-                    <div class="knowledge-icon">
-                        📖
-                    </div>
-
-                    <h3>
-                        Digital Libraries
-                    </h3>
-
-                    <p>
-                        Online collections provide access to
-                        books, articles, documents, and other
-                        educational materials.
-                    </p>
-
-                </div>
-
-
-                <div class="knowledge-card">
-
-                    <div class="knowledge-icon">
-                        🤝
-                    </div>
-
-                    <h3>
-                        Collaboration
-                    </h3>
-
-                    <p>
-                        Shared documents and online platforms
-                        allow several people to work together
-                        on the same project.
-                    </p>
-
-                </div>
-
-
-                <div class="knowledge-card">
-
-                    <div class="knowledge-icon">
-                        💬
-                    </div>
-
-                    <h3>
-                        Online Communities
-                    </h3>
-
-                    <p>
-                        Communities allow people to exchange
-                        experiences, questions, explanations,
-                        and ideas.
-                    </p>
-
-                </div>
-
-
-                <div class="knowledge-card">
-
-                    <div class="knowledge-icon">
-                        🎓
-                    </div>
-
-                    <h3>
-                        Educational Resources
-                    </h3>
-
-                    <p>
-                        Students can find tutorials, courses,
-                        explanations, exercises, and other
-                        learning materials online.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-         04 TECHNOLOGY IN COMMERCE
-    ========================================= -->
-
-    <section
-        class="section commerce-section"
-        id="commerce"
-    >
-
-        <div class="section-inner">
-
-            <div class="heading">
-
-                <span class="heading-number">
-                    QUESTION 04
-                </span>
-
-                <h2>
-                    How has technology changed commerce?
-                </h2>
-
-                <p>
-                    Digital technology has created new ways
-                    for businesses and consumers to interact.
-                </p>
-
-            </div>
-
-
-            <div class="commerce-layout">
-
-                <div class="commerce-image">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=85"
-                        alt="Person shopping online"
-                    >
-
-                </div>
-
-
-                <div class="commerce-content">
-
-                    <h3>
-                        Shopping beyond the traditional store
-                    </h3>
-
-                    <p>
-                        Commerce is no longer limited to
-                        physical locations. Websites and mobile
-                        platforms allow businesses to display
-                        products and communicate with customers
-                        through digital channels.
-                    </p>
-
-
-                    <div class="commerce-list">
-
-                        <div class="commerce-item">
-
-                            <div class="commerce-item-icon">
-                                🛍️
-                            </div>
-
-                            <div>
-
-                                <h4>
-                                    Online Shopping
-                                </h4>
-
-                                <p>
-                                    Customers can explore and
-                                    purchase products through
-                                    digital stores.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="commerce-item">
-
-                            <div class="commerce-item-icon">
-                                💳
-                            </div>
-
-                            <div>
-
-                                <h4>
-                                    Electronic Payments
-                                </h4>
-
-                                <p>
-                                    Digital payment systems make
-                                    online transactions possible.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="commerce-item">
-
-                            <div class="commerce-item-icon">
-                                📣
-                            </div>
-
-                            <div>
-
-                                <h4>
-                                    Digital Marketing
-                                </h4>
-
-                                <p>
-                                    Businesses can present products
-                                    through websites and social platforms.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="commerce-item">
-
-                            <div class="commerce-item-icon">
-                                🌍
-                            </div>
-
-                            <div>
-
-                                <h4>
-                                    International Markets
-                                </h4>
-
-                                <p>
-                                    Digital platforms can connect
-                                    businesses with customers in
-                                    different countries.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-         05 LEARNING ENGLISH ONLINE
-    ========================================= -->
-
-    <section
-        class="section"
-        id="learning"
-    >
-
-        <div class="section-inner">
-
-            <div class="learning-header">
-
-                <span class="heading-number">
-                    QUESTION 05
-                </span>
-
-                <h2>
-                    How can people learn English online?
-                </h2>
-
-                <p>
-                    Online learning combines language practice
-                    with digital resources that students can
-                    access from different places and devices.
-                </p>
-
-            </div>
-
-
-            <div class="learning-path">
-
-                <div class="learning-step">
-
-                    <span>
-                        STEP 01
-                    </span>
-
-                    <h3>
-                        Watch & Listen
-                    </h3>
-
-                    <p>
-                        Videos, audio materials, interviews,
-                        and podcasts can expose learners to
-                        different forms of spoken English.
-                    </p>
-
-                </div>
-
-
-                <div class="learning-step">
-
-                    <span>
-                        STEP 02
-                    </span>
-
-                    <h3>
-                        Read
-                    </h3>
-
-                    <p>
-                        Digital articles, stories, news,
-                        and educational texts can help develop
-                        reading comprehension and vocabulary.
-                    </p>
-
-                </div>
-
-
-                <div class="learning-step">
-
-                    <span>
-                        STEP 03
-                    </span>
-
-                    <h3>
-                        Practice
-                    </h3>
-
-                    <p>
-                        Interactive exercises can help learners
-                        work with grammar, vocabulary,
-                        pronunciation, and writing.
-                    </p>
-
-                </div>
-
-
-                <div class="learning-step">
-
-                    <span>
-                        STEP 04
-                    </span>
-
-                    <h3>
-                        Communicate
-                    </h3>
-
-                    <p>
-                        Online communities and digital
-                        communication tools can provide
-                        opportunities to use English with others.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-         PRESENTATION
-    ========================================= -->
-
-    <section class="section presentation">
-
-        <div class="section-inner">
-
-            <div class="heading">
-
-                <span class="heading-number">
-                    EXTRA RESOURCE
-                </span>
-
-                <h2>
-                    Project Presentation
-                </h2>
-
-                <p>
-                    Explore the presentation that accompanies
-                    this project and review the main ideas
-                    about English, technology, and education.
-                </p>
-
-            </div>
-
+            <!-- UPDATED CANVA LINK -->
 
             <a
-                href="https://canva.link/ubqw30lie85biba"
+                class="presentation-button"
+                href="https://canva.link/otzzovybibtb30o"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="presentation-button"
             >
                 Open Presentation
-                →
             </a>
 
-        </div>
+        </section>
 
-    </section>
-
-
-    <!-- =========================================
-         FINAL MESSAGE
-    ========================================= -->
-
-    <section class="final-message">
-
-        <h2>
-            Language Meets Technology
-        </h2>
-
-        <p>
-            English and technology work together in many
-            areas of modern life. Understanding both can
-            help people communicate, learn, discover
-            information, participate in digital spaces,
-            and connect with opportunities around the world.
-        </p>
-
-    </section>
+    </main>
 
 
-    <!-- =========================================
-         FOOTER
-    ========================================= -->
+    <!-- FOOTER -->
 
     <footer>
 
-        <p>
-            <strong>
-                English & The Digital World
-            </strong>
-        </p>
+        <strong>
+            Language in Motion
+        </strong>
 
-        <p>
-            Reality & Virtuality Resource • School Project
-        </p>
+        <span>
+            English • Technology • Knowledge • Commerce • Learning
+        </span>
 
     </footer>
 
 
-    <!-- =========================================
-         BACK TO TOP
-    ========================================= -->
-
-    <button
-        id="topButton"
-        aria-label="Back to top"
-    >
-        ↑
-    </button>
-
-
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================= -->
+    <!-- JAVASCRIPT -->
 
     <script>
 
-        /* =========================================
-           BACK TO TOP
-        ========================================= */
+        function toggleMenu() {
 
-        const topButton =
-            document.getElementById("topButton");
+            const menu = document.getElementById("mobileMenu");
 
-        window.addEventListener("scroll", function () {
+            menu.classList.toggle("active");
 
-            if (window.scrollY > 500) {
-
-                topButton.classList.add("show");
-
-            } else {
-
-                topButton.classList.remove("show");
-
-            }
-
-        });
+        }
 
 
-        topButton.addEventListener("click", function () {
+        function closeMenu() {
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            const menu = document.getElementById("mobileMenu");
 
-        });
+            menu.classList.remove("active");
 
-
-        /* =========================================
-           MOBILE MENU
-        ========================================= */
-
-        const menuButton =
-            document.getElementById("menuButton");
-
-        const mobileMenu =
-            document.getElementById("mobileMenu");
-
-        const mobileResourcesButton =
-            document.getElementById("mobileResourcesButton");
-
-        const mobileResourcesSubmenu =
-            document.getElementById("mobileResourcesSubmenu");
-
-
-        menuButton.addEventListener("click", function () {
-
-            const opened =
-                mobileMenu.classList.toggle("open");
-
-            menuButton.setAttribute(
-                "aria-expanded",
-                opened
-            );
-
-            menuButton.setAttribute(
-                "aria-label",
-                opened
-                    ? "Close menu"
-                    : "Open menu"
-            );
-
-            menuButton.textContent =
-                opened ? "✕" : "☰";
-
-        });
-
-
-        /* =========================================
-           MOBILE RESOURCES
-        ========================================= */
-
-        mobileResourcesButton.addEventListener(
-            "click",
-            function () {
-
-                mobileResourcesSubmenu.classList.toggle(
-                    "open"
-                );
-
-            }
-        );
-
-
-        /* =========================================
-           CLOSE MENU AFTER CLICKING A LINK
-        ========================================= */
-
-        document
-            .querySelectorAll(".mobile-menu a")
-            .forEach(function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        mobileMenu.classList.remove("open");
-
-                        mobileResourcesSubmenu.classList.remove(
-                            "open"
-                        );
-
-                        menuButton.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                        menuButton.setAttribute(
-                            "aria-label",
-                            "Open menu"
-                        );
-
-                        menuButton.textContent = "☰";
-
-                    }
-                );
-
-            });
-
-
-        /* =========================================
-           RESET MOBILE MENU ON RESIZE
-        ========================================= */
-
-        window.addEventListener(
-            "resize",
-            function () {
-
-                if (window.innerWidth > 850) {
-
-                    mobileMenu.classList.remove("open");
-
-                    mobileResourcesSubmenu.classList.remove(
-                        "open"
-                    );
-
-                    menuButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                    menuButton.setAttribute(
-                        "aria-label",
-                        "Open menu"
-                    );
-
-                    menuButton.textContent = "☰";
-
-                }
-
-            }
-        );
+        }
 
     </script>
 
 </body>
 </html>
-```
