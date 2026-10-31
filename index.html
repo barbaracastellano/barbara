@@ -96,12 +96,12 @@
 
         .resources-menu {
             position: absolute;
-            left: 50%;
-            top: calc(100% + 14px);
-            transform: translateX(-50%);
+            left: calc(100% + 14px);
+            top: 50%;
+            transform: translateY(-50%);
             background: #111;
             border: 1px solid rgba(255,255,255,0.15);
-            min-width: 120px;
+            min-width: 160px;
             padding: 10px 0;
             display: none;
             flex-direction: column;
@@ -117,9 +117,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            padding: 12px 0;
+            writing-mode: initial;
+            transform: none;
+            padding: 12px 14px;
             font-size: 10px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
