@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Language in Motion</title>
-
     <style>
         * {
             margin: 0;
@@ -35,10 +33,6 @@
             object-fit: cover;
         }
 
-        /* =========================
-           DESKTOP NAVIGATION
-        ========================= */
-
         .side-nav {
             position: fixed;
             left: 0;
@@ -46,7 +40,7 @@
             width: 105px;
             height: 100vh;
             background: #111;
-            color: white;
+            color: #fff;
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -69,10 +63,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 28px;
+            gap: 22px;
         }
 
-        .nav-links a {
+        .nav-links a,
+        .resources-trigger {
             writing-mode: vertical-rl;
             transform: rotate(180deg);
             font-size: 11px;
@@ -80,15 +75,54 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: 0.3s ease;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            color: inherit;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .resources-trigger:hover,
+        .resources-menu a:hover {
             color: #ff4f4f;
         }
 
-        /* =========================
-           MOBILE HEADER
-        ========================= */
+        .resources-dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .resources-menu {
+            position: absolute;
+            left: 50%;
+            top: calc(100% + 14px);
+            transform: translateX(-50%);
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.15);
+            min-width: 140px;
+            padding: 10px 0;
+            display: none;
+            z-index: 20;
+        }
+
+        .resources-dropdown:hover .resources-menu,
+        .resources-dropdown:focus-within .resources-menu {
+            display: block;
+        }
+
+        .resources-menu a {
+            display: block;
+            writing-mode: initial;
+            transform: none;
+            padding: 10px 18px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: white;
+            text-align: center;
+        }
 
         .mobile-header {
             display: none;
@@ -134,7 +168,8 @@
             display: block;
         }
 
-        .mobile-menu a {
+        .mobile-menu a,
+        .mobile-menu .mobile-resources {
             display: block;
             color: white;
             padding: 14px 0;
@@ -145,9 +180,19 @@
             letter-spacing: 2px;
         }
 
-        /* =========================
-           MAIN
-        ========================= */
+        .mobile-menu .mobile-resources {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mobile-menu .mobile-resources a {
+            border-bottom: none;
+            padding: 8px 0;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: #ffb0b0;
+        }
 
         main {
             margin-left: 105px;
@@ -157,10 +202,6 @@
             min-height: 100vh;
             padding: 100px 8%;
         }
-
-        /* =========================
-           COVER
-        ========================= */
 
         .cover {
             min-height: 100vh;
@@ -209,10 +250,6 @@
             filter: grayscale(100%);
         }
 
-        /* =========================
-           ARTICLE SECTIONS
-        ========================= */
-
         .article {
             background: #f4f1eb;
         }
@@ -244,10 +281,6 @@
             font-size: 20px;
             margin-bottom: 70px;
         }
-
-        /* =========================
-           WORLD
-        ========================= */
 
         .world-feature {
             display: grid;
@@ -305,10 +338,6 @@
         .world-card p {
             color: #555;
         }
-
-        /* =========================
-           TECHNOLOGY
-        ========================= */
 
         .technology {
             background: #111;
@@ -369,10 +398,6 @@
             text-align: right;
         }
 
-        /* =========================
-           KNOWLEDGE
-        ========================= */
-
         .knowledge-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -420,10 +445,6 @@
             color: #666;
             font-size: 14px;
         }
-
-        /* =========================
-           COMMERCE
-        ========================= */
 
         .commerce {
             background: #d9d4cb;
@@ -495,10 +516,6 @@
             color: #555;
         }
 
-        /* =========================
-           LEARNING
-        ========================= */
-
         .learning {
             background: #f4f1eb;
         }
@@ -555,10 +572,6 @@
             max-width: 700px;
         }
 
-        /* =========================
-           PRESENTATION
-        ========================= */
-
         .presentation {
             min-height: auto;
             background: #ff4f4f;
@@ -598,10 +611,6 @@
             color: #111;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
-
         footer {
             margin-left: 105px;
             background: #111;
@@ -622,12 +631,7 @@
             font-size: 13px;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
         @media (max-width: 1000px) {
-
             .side-nav {
                 display: none;
             }
@@ -696,7 +700,6 @@
         }
 
         @media (max-width: 650px) {
-
             .mobile-header {
                 height: 65px;
                 padding: 0 20px;
@@ -791,19 +794,9 @@
         }
     </style>
 </head>
-
 <body>
-
-    <!-- =========================
-         DESKTOP NAVIGATION
-    ========================== -->
-
     <aside class="side-nav">
-
-        <div class="logo">
-            LM
-        </div>
-
+        <div class="logo">LM</div>
         <nav class="nav-links">
             <a href="#home">Home</a>
             <a href="#world">English</a>
@@ -811,98 +804,55 @@
             <a href="#knowledge">Knowledge</a>
             <a href="#commerce">Commerce</a>
             <a href="#learning">Learning</a>
-            <a href="#presentation">Resources</a>
+            <div class="resources-dropdown">
+                <button class="resources-trigger" type="button">Resources</button>
+                <div class="resources-menu">
+                    <a href="https://youtube.com/shorts/gopBQoLLW6E?si=J5QkbdBHGywjYhaL" target="_blank" rel="noopener noreferrer">Resources 1</a>
+                </div>
+            </div>
         </nav>
-
     </aside>
 
-
-    <!-- =========================
-         MOBILE NAVIGATION
-    ========================== -->
-
     <header class="mobile-header">
-
-        <div class="mobile-logo">
-            LM
-        </div>
-
-        <button class="menu-button" onclick="toggleMenu()">
-            ☰
-        </button>
-
+        <div class="mobile-logo">LM</div>
+        <button class="menu-button" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
-
         <a href="#home" onclick="closeMenu()">Home</a>
         <a href="#world" onclick="closeMenu()">English</a>
         <a href="#technology" onclick="closeMenu()">Technology</a>
         <a href="#knowledge" onclick="closeMenu()">Knowledge</a>
         <a href="#commerce" onclick="closeMenu()">Commerce</a>
         <a href="#learning" onclick="closeMenu()">Learning</a>
-        <a href="#presentation" onclick="closeMenu()">Resources</a>
-
+        <div class="mobile-resources">
+            <span>Resources</span>
+            <a href="https://youtube.com/shorts/gopBQoLLW6E?si=J5QkbdBHGywjYhaL" target="_blank" rel="noopener noreferrer" onclick="closeMenu()">Resources 1</a>
+        </div>
     </div>
 
-
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-
     <main>
-
-        <!-- COVER -->
-
         <section class="cover" id="home">
-
             <div class="cover-grid">
-
                 <div>
-
-                    <h1>
-                        English
-                        <span>In</span>
-                        Motion
-                    </h1>
-
+                    <h1>English <span>In</span> Motion</h1>
                     <p class="cover-description">
                         English has become more than a language.
                         It connects people, technologies, ideas,
                         businesses, and educational opportunities
                         across the modern world.
                     </p>
-
                 </div>
-
                 <div class="cover-image">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80"
-                        alt="World map"
-                    >
-
+                    <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80" alt="World map">
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- ENGLISH IN THE WORLD -->
-
         <section class="article" id="world">
-
             <div class="article-heading">
-
-                <h2>
-                    English
-                    <span>Across</span>
-                    The World
-                </h2>
-
+                <h2>English <span>Across</span> The World</h2>
             </div>
-
             <p class="article-intro">
                 English is used in many different environments.
                 It appears in international communication,
@@ -910,546 +860,208 @@
                 and professional life.
             </p>
 
-
             <div class="world-feature">
-
                 <div class="world-image">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80"
-                        alt="Traveler looking at a landscape"
-                    >
-
+                    <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80" alt="Traveler looking at a landscape">
                 </div>
-
                 <div class="world-text">
-
-                    <h3>
-                        A shared language
-                        for different cultures.
-                    </h3>
-
+                    <h3>A shared language for different cultures.</h3>
                     <p>
-                        People from different countries often
-                        use English when they do not share the
-                        same native language.
+                        People from different countries often use English when they do not share the same native language.
                     </p>
-
                     <p>
-                        This makes English especially useful for
-                        international meetings, tourism,
-                        academic collaboration, and digital
-                        communication.
+                        This makes English especially useful for international meetings, tourism, academic collaboration, and digital communication.
                     </p>
-
-                    <div class="quote">
-                        “Language creates a bridge between people.”
-                    </div>
-
+                    <div class="quote">“Language creates a bridge between people.”</div>
                 </div>
-
             </div>
-
 
             <div class="world-cards">
-
                 <div class="world-card">
-
                     <h4>Travel</h4>
-
-                    <p>
-                        English can help travelers communicate
-                        at airports, hotels, restaurants,
-                        museums, and tourist destinations.
-                    </p>
-
+                    <p>English can help travelers communicate at airports, hotels, restaurants, museums, and tourist destinations.</p>
                 </div>
-
                 <div class="world-card">
-
                     <h4>Education</h4>
-
-                    <p>
-                        Many universities, courses, books,
-                        journals, and academic resources are
-                        available in English.
-                    </p>
-
+                    <p>Many universities, courses, books, journals, and academic resources are available in English.</p>
                 </div>
-
                 <div class="world-card">
-
                     <h4>Communication</h4>
-
-                    <p>
-                        English is frequently used in international
-                        conversations between people with different
-                        first languages.
-                    </p>
-
+                    <p>English is frequently used in international conversations between people with different first languages.</p>
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- ENGLISH AND TECHNOLOGY -->
-
         <section class="article technology" id="technology">
-
             <div class="article-heading">
-
-                <h2>
-                    English
-                    <span>Meets</span>
-                    Technology
-                </h2>
-
+                <h2>English <span>Meets</span> Technology</h2>
             </div>
-
             <p class="article-intro">
-                Technology has changed the way people learn,
-                communicate, work, and access information.
-                English is deeply connected to this digital
-                environment.
+                Technology has changed the way people learn, communicate, work, and access information. English is deeply connected to this digital environment.
             </p>
 
-
             <div class="tech-layout">
-
                 <div class="tech-image">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
-                        alt="Computer technology"
-                    >
-
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Technology image">
                 </div>
-
                 <div class="tech-content">
-
-                    <h3>
-                        The digital world
-                        speaks English.
-                    </h3>
-
-                    <p>
-                        Many websites, applications, programming
-                        resources, tutorials, and technology
-                        communities use English as a primary
-                        language.
-                    </p>
-
-                    <p>
-                        Understanding common digital vocabulary
-                        allows users to navigate technology more
-                        comfortably.
-                    </p>
-
+                    <h3>The digital world speaks English.</h3>
+                    <p>Many websites, applications, programming resources, tutorials, and technology communities use English as a primary language.</p>
+                    <p>Understanding common digital vocabulary allows users to navigate technology more comfortably.</p>
 
                     <div class="digital-words">
-
                         <div class="digital-word">
                             <strong>Account</strong>
                             <span>A personal profile used on a platform.</span>
                         </div>
-
                         <div class="digital-word">
                             <strong>Download</strong>
                             <span>To transfer information to a device.</span>
                         </div>
-
                         <div class="digital-word">
                             <strong>Search</strong>
                             <span>To look for information online.</span>
                         </div>
-
                         <div class="digital-word">
                             <strong>Update</strong>
                             <span>A newer version of software or content.</span>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </section>
-
-
-        <!-- SHARED KNOWLEDGE -->
 
         <section class="article" id="knowledge">
-
             <div class="article-heading">
-
-                <h2>
-                    Knowledge
-                    <span>Moves</span>
-                    Online
-                </h2>
-
+                <h2>Knowledge <span>Moves</span> Online</h2>
             </div>
-
             <p class="article-intro">
-                Digital platforms allow people to create,
-                organize, publish, and exchange knowledge
-                with audiences around the world.
+                Digital platforms allow people to create, organize, publish, and exchange knowledge with audiences around the world.
             </p>
-
 
             <div class="knowledge-grid">
-
                 <div class="knowledge-column">
-
                     <h3>Create</h3>
-
-                    <p>
-                        People can write articles, record lessons,
-                        design graphics, produce presentations,
-                        and create educational material.
-                    </p>
-
+                    <p>People can write articles, record lessons, design graphics, produce presentations, and create educational material.</p>
                 </div>
-
                 <div class="knowledge-column">
-
                     <h3>Publish</h3>
-
-                    <p>
-                        Websites, blogs, online classrooms,
-                        social networks, and digital libraries
-                        make information accessible.
-                    </p>
-
+                    <p>Websites, blogs, online classrooms, social networks, and digital libraries make information accessible.</p>
                 </div>
-
                 <div class="knowledge-column">
-
                     <h3>Discuss</h3>
-
-                    <p>
-                        Users can comment, ask questions,
-                        collaborate, correct information,
-                        and exchange different perspectives.
-                    </p>
-
+                    <p>Users can comment, ask questions, collaborate, correct information, and exchange different perspectives.</p>
                 </div>
-
             </div>
-
 
             <div class="knowledge-flow">
-
                 <div class="flow-item">
-
                     <h4>Create</h4>
-
-                    <p>
-                        Develop a useful idea or resource.
-                    </p>
-
+                    <p>Develop a useful idea or resource.</p>
                 </div>
-
                 <div class="flow-item">
-
                     <h4>Publish</h4>
-
-                    <p>
-                        Make the information available online.
-                    </p>
-
+                    <p>Make the information available online.</p>
                 </div>
-
                 <div class="flow-item">
-
                     <h4>Discuss</h4>
-
-                    <p>
-                        Exchange opinions and questions.
-                    </p>
-
+                    <p>Exchange opinions and questions.</p>
                 </div>
-
                 <div class="flow-item">
-
                     <h4>Share</h4>
-
-                    <p>
-                        Help information reach new people.
-                    </p>
-
+                    <p>Help information reach new people.</p>
                 </div>
-
             </div>
-
         </section>
-
-
-        <!-- TECHNOLOGY IN COMMERCE -->
 
         <section class="article commerce" id="commerce">
-
             <div class="article-heading">
-
-                <h2>
-                    Technology
-                    <span>Changes</span>
-                    Commerce
-                </h2>
-
+                <h2>Technology <span>Changes</span> Commerce</h2>
             </div>
-
             <p class="commerce-intro">
-                Digital technology has transformed the shopping
-                experience. Customers can discover products,
-                compare prices, make payments, and track orders
-                without visiting a physical store.
+                Digital technology has transformed the shopping experience. Customers can discover products, compare prices, make payments, and track orders without visiting a physical store.
             </p>
-
 
             <div class="timeline">
-
                 <div class="timeline-step">
-
                     <h3>Discover</h3>
-
-                    <p>
-                        People discover products through websites,
-                        applications, advertisements, social media,
-                        and search engines.
-                    </p>
-
+                    <p>People discover products through websites, applications, advertisements, social media, and search engines.</p>
                 </div>
-
-
                 <div class="timeline-step">
-
                     <h3>Research</h3>
-
-                    <p>
-                        Customers can read descriptions, compare
-                        prices, examine reviews, and learn about
-                        different products before buying.
-                    </p>
-
+                    <p>Customers can read descriptions, compare prices, examine reviews, and learn about different products before buying.</p>
                 </div>
-
-
                 <div class="timeline-step">
-
                     <h3>Buy</h3>
-
-                    <p>
-                        Online stores allow customers to place
-                        orders and complete payments through
-                        digital systems.
-                    </p>
-
+                    <p>Online stores allow customers to place orders and complete payments through digital systems.</p>
                 </div>
-
-
                 <div class="timeline-step">
-
                     <h3>Track</h3>
-
-                    <p>
-                        After a purchase, customers can receive
-                        notifications and follow the delivery
-                        process online.
-                    </p>
-
+                    <p>After a purchase, customers can receive notifications and follow the delivery process online.</p>
                 </div>
-
             </div>
-
         </section>
-
-
-        <!-- LEARNING ENGLISH ONLINE -->
 
         <section class="article learning" id="learning">
-
             <div class="article-heading">
-
-                <h2>
-                    Learn
-                    <span>English</span>
-                    Online
-                </h2>
-
+                <h2>Learn <span>English</span> Online</h2>
             </div>
-
             <p class="article-intro">
-                Online learning gives students access to
-                English practice from almost anywhere.
-                Digital resources can support different
-                learning styles and abilities.
+                Online learning gives students access to English practice from almost anywhere. Digital resources can support different learning styles and abilities.
             </p>
-
 
             <div class="learning-grid">
-
                 <div class="learning-image">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80"
-                        alt="Student studying online"
-                    >
-
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80" alt="Student studying online">
                 </div>
-
-
                 <div class="learning-methods">
-
                     <div class="method">
-
                         <h3>Listening</h3>
-
-                        <p>
-                            Students can listen to interviews,
-                            conversations, podcasts, lessons,
-                            and other English materials.
-                        </p>
-
+                        <p>Students can listen to interviews, conversations, podcasts, lessons, and other English materials.</p>
                     </div>
-
-
                     <div class="method">
-
                         <h3>Reading</h3>
-
-                        <p>
-                            Online articles, digital books,
-                            educational websites, and news
-                            can increase vocabulary and
-                            comprehension.
-                        </p>
-
+                        <p>Online articles, digital books, educational websites, and news can increase vocabulary and comprehension.</p>
                     </div>
-
-
                     <div class="method">
-
                         <h3>Writing</h3>
-
-                        <p>
-                            Students can practice writing
-                            messages, essays, comments,
-                            descriptions, and other texts.
-                        </p>
-
+                        <p>Students can practice writing messages, essays, comments, descriptions, and other texts.</p>
                     </div>
-
-
                     <div class="method">
-
                         <h3>Speaking</h3>
-
-                        <p>
-                            Video calls, language platforms,
-                            online communities, and voice
-                            activities can provide speaking
-                            practice.
-                        </p>
-
+                        <p>Video calls, language platforms, online communities, and voice activities can provide speaking practice.</p>
                     </div>
-
                 </div>
-
             </div>
-
 
             <div class="learning-final">
-
-                <h3>
-                    Learning is no longer
-                    limited to a classroom.
-                </h3>
-
-                <p>
-                    With digital tools and consistent practice,
-                    students can develop their English skills
-                    through resources that fit their interests,
-                    schedules, and goals.
-                </p>
-
+                <h3>Learning is no longer limited to a classroom.</h3>
+                <p>With digital tools and consistent practice, students can develop their English skills through resources that fit their interests, schedules, and goals.</p>
             </div>
-
         </section>
-
-
-        <!-- PRESENTATION -->
 
         <section class="presentation" id="presentation">
-
-            <h2>
-                Final
-                Presentation
-            </h2>
-
-            <p>
-                Explore the presentation connected to this
-                project and review the main ideas about English,
-                technology, knowledge, commerce, and online
-                learning.
-            </p>
-
-            <!-- UPDATED CANVA LINK -->
-
-            <a
-                class="presentation-button"
-                href="https://canva.link/otzzovybibtb30o"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Open Presentation
-            </a>
-
+            <h2>Final Presentation</h2>
+            <p>Explore the presentation connected to this project and review the main ideas about English, technology, knowledge, commerce, and online learning.</p>
+            <a class="presentation-button" href="https://youtube.com/shorts/gopBQoLLW6E?si=J5QkbdBHGywjYhaL" target="_blank" rel="noopener noreferrer">Open Presentation</a>
         </section>
-
     </main>
 
-
-    <!-- FOOTER -->
-
     <footer>
-
-        <strong>
-            Language in Motion
-        </strong>
-
-        <span>
-            English • Technology • Knowledge • Commerce • Learning
-        </span>
-
+        <strong>Language in Motion</strong>
+        <span>English • Technology • Knowledge • Commerce • Learning</span>
     </footer>
 
-
-    <!-- JAVASCRIPT -->
-
     <script>
-
         function toggleMenu() {
-
-            const menu = document.getElementById("mobileMenu");
-
-            menu.classList.toggle("active");
-
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
         }
-
 
         function closeMenu() {
-
-            const menu = document.getElementById("mobileMenu");
-
-            menu.classList.remove("active");
-
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.remove('active');
         }
-
     </script>
-
 </body>
 </html>
